@@ -1,4 +1,3 @@
-
 \section{In-Depth Suite Writing Tutorial}
 \label{In-Depth Suite Writing Tutorial}
 
@@ -20,7 +19,7 @@ This example supposes:
 
 Our Fortran program reads in some position data and then pretends to calculate a new one based on a compass direction and a 5 knot speed for a given period of time.
 
-If you are reading this tutorial via the cylc VM then the Fortran code is located at {\em \$HOME/tutorial/suites/navigation/src/dead\_reckoning.f90}. Otherwise, the code is given in Appendix~\ref{Appendix In-Depth Suite Writing Tutorial}.
+If you are reading this tutorial via the Cylc VM then the Fortran code is located at {\em \$HOME/tutorial/suites/navigation/src/dead\_reckoning.f90}. Otherwise, the code is given in Appendix~\ref{Appendix In-Depth Suite Writing Tutorial}.
 
 We need to analyse our program to figure out what the dependencies are.
 
@@ -47,7 +46,7 @@ We also want to build the program to begin with, so we need a compilation task t
 
 \subsection{Suite Creation}
 
-If you are running this tutorial on the cylc VM \footnote{
+If you are running this tutorial on the Cylc VM \footnote{
     If and only if you are {\em not} running on the VM:
 \begin{itemize}
     \item create a new directory called {\em navigation}) somewhere in your homespace, which will be the top-level suite directory.
@@ -83,9 +82,13 @@ It looks like this:
         """
 \end{lstlisting}
 
-    We've set the suite to run from midnight, 1 June 2016 to midnight, 3 June 2016. This is just a model time or label. It isn't synchronised with real clock time.
-
-    We've set the \lstinline{compile_navigate} task to run once at the initial cycle point (i.e. midnight, 1 June 2016). This will compile the source code and produce an executable in a directory {\em \$HOME/cylc-run/navigation/share/}. This directory, {\em \$CYLC\_SUITE\_SHARE\_PATH} is provided by cylc as a place for inter-task 'sharing' of files.
+    We've set the suite to run from midnight, 1 June 2016 to midnight, 3 June
+    2016. Note that cycle points are just task labels that can be used as
+    model start times (or similar) in task jobs. {\em They are not synchronised
+    with real clock time unless you attach a clock trigger to a task}
+    (see~\ref{Clock Triggered Tasks}).
+ 
+    We've set the \lstinline{compile_navigate} task to run once at the initial cycle point (i.e. midnight, 1 June 2016). This will compile the source code and produce an executable in a directory {\em \$HOME/cylc-run/navigation/share/}. This directory, {\em \$CYLC\_SUITE\_SHARE\_PATH} is provided by Cylc as a place for inter-task 'sharing' of files.
 
     All our tasks inherit from \lstinline{root} and will run \lstinline{sleep 5} from the \lstinline{root} {\em pre-script} setting.
 
@@ -93,7 +96,7 @@ It looks like this:
 
     We can test that this works as it is.
     
-    Run \lstinline{rose suite-run}\footnote {Section~\ref{Hello World in cylc} explained why we're running this instead of cylc commands.}.
+    Run \lstinline{rose suite-run} in the suite source directory.\footnote {Section~\ref{Hello World in Cylc} explained why we're running this instead of Cylc commands.}
     
     The \lstinline{compile_navigate} task should succeed, and the suite will shut down automatically. After that, there should be a newly created {\em dead\_reckoning.exe} file under {\em \$HOME/cylc-run/navigation/share/}. Have a look in that directory.
 
@@ -101,7 +104,7 @@ It looks like this:
 
 Let's now add our navigation task to run our executable. There are two steps involved in adding a task in the {\em suite.rc}:
 \begin{itemize}
-    \item Add the task to the dependencies so cylc knows when to run it.
+    \item Add the task to the dependencies so Cylc knows when to run it.
     \item Configure what the task actually does, in the runtime section!
 \end{itemize}
 
@@ -130,7 +133,7 @@ We also need to tell the \lstinline{navigate} task what to run. Add a new entry 
             TIME_INTERVAL_HRS = 3
 \end{lstlisting}
 
-This instructs cylc to run the executable made by \lstinline{compile_navigate} and sets up the necessary environment variables.
+This instructs Cylc to run the executable made by \lstinline{compile_navigate} and sets up the necessary environment variables.
 
 Our navigation executable will read and write the {\em \$POSITION\_FILEPATH} position file. Each run of the executable will read the previous run's output. However, at the first cycle point, the file will not currently exist. We'll need to make it and include start coordinates.
 
@@ -193,19 +196,20 @@ Your suite should now look something like this:
         script = echo 50.0 -3.0 >$CYLC_SUITE_SHARE_PATH/position
 \end{lstlisting}
 
-\subsection{Running our Suite}
+\subsection{Running The Suite}
 
-Run:
+Run (in the suite source directory):
 
 \begin{lstlisting}[mathescape, language=bash]
 $\$$ rose suite-run
 \end{lstlisting}
 
-If everything has been set up successfully, after running that command, \lstinline{cylc gui} will launch with your running suite.
+If everything has been set up successfully, after running that command,
+\lstinline{cylc gui} will launch with your running suite.
 
 \subsection{Finished Output}
 
-You can look at the finished output by running:
+You can look at the finished output by running (in the suite source directory):
 
 \begin{lstlisting}[mathescape, language=bash]
 $\$$ rose suite-log
@@ -255,7 +259,8 @@ CLOSE(1)
 
 \note{Beware of pdf copy-and-paste introducing line breaks before and after the asterisks (*) in the code above.}
 
-This will produce a {\em job-map.html} file per job which you can click through to in \lstinline{Rose Bush} (via running \lstinline{rose suite-log}).
+This will produce a {\em job-map.html} file per job which you can click through to in \lstinline{Rose Bush} (via running \lstinline{rose suite-log} in the
+suite source directory).
 
 \subsection{More Cycling}
 
@@ -282,7 +287,7 @@ In order to make the \lstinline{navigate} task wait for our new \lstinline{take_
 
 \subsection{Adding a Script to the Suite}
 
-You can put scripts in the {\em bin/} directory of a suite, and they will be added to cylc's path.
+You can put scripts in the {\em bin/} directory of a suite, and they will be added to Cylc's path.
 
 Change directory to the root of your suite, and create a {\em bin/} directory.
 
@@ -324,7 +329,7 @@ We need to reference this script explicitly in the {\em suite.rc} for our \lstin
 
 \subsection{Results}
 
-Run the suite by invoking:
+Run the suite by invoking (in the suite source directory):
 \begin{lstlisting}[mathescape, language=bash]
 $\$$ rose suite-run
 \end{lstlisting}
@@ -360,7 +365,7 @@ l_rivers=.false.
 \end{lstlisting}
 
 Rose has a powerful set of utilities for the configuration and running of executables, suite
-storage and version control, and also includes some top-level suite running functionality that will be migrated to cylc.
+storage and version control, and also includes some top-level suite running functionality that will be migrated to Cylc.
 
 In this part of the tutorial, we'll demonstrate a couple of pieces of Rose functionality that can enhance suites and
 tasks:

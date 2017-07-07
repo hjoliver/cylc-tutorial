@@ -6,7 +6,9 @@ Cylc Overview} and the Cylc User Guide.}
 
 Cylc (``silk'') is a workflow engine that can manage continuous workflows of
 cycling tasks for applications such as weather and environmental
-forecasting, and climate simulation.
+forecasting, and climate simulation.\footnote{Cylc is not in any way
+specialized to weather and climate applications, but the concept of {\em
+cycling workflows} is critical in those fields.}
 
 \begin{itemize}
     \item \terminology{A \underline{task} represents a \underline{job} (a script or
@@ -59,16 +61,16 @@ defining multiple steps or ``chunks'' within fixed cycles.}
 
 Cylc knows about inter-cycle dependence and manages the suite as {\em a single
 continuous workflow with no cycle boundaries}, not just a series of separate
-single-cycle-point workflows.  In cylc, cycle points are merely task labels,
+single-cycle-point workflows.  In Cylc, cycle points are merely task labels,
 not global loop indices.  Each task can run when its own inputs are satisfied,
-regardless of cycle point.  Here's how cylc sees three cycles of our example
+regardless of cycle point.  Here's how Cylc sees three cycles of our example
 suite (and note that this can go on indefinitely):
 
 \begin{center}
     \includegraphics[width=0.65\columnwidth]{resources/example-3cycles.png}
 \end{center}
 
-(The integers attached to each task are the cycle points). Consequently, cylc can
+(The integers attached to each task are the cycle points). Consequently, Cylc can
 run workflows faster, recover from delays faster, and handle failures and
 delays better than fixed-cycle schedulers.  Appendix~\ref{Appendix Cylc
 Overview} shows actual job schedules for this example suite, and compares the

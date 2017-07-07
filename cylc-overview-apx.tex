@@ -6,7 +6,7 @@ Overview}.}
 
 \terminology{A \underline{task} represents a \underline{job} (a script or
 program) that runs on a computer.} We make this distinction because a {\em job}
-exists only when it runs, but its representation in a cylc suite has a longer
+exists only when it runs, but its representation in a Cylc suite has a longer
 lifetime.  For instance, a ``waiting'' task represents a job that will run
 sometime in the future because its inputs have not been satisfied yet.
 
@@ -20,7 +20,7 @@ offset from that point. See Section~\ref{Clock Triggered Tasks}.
 \terminology{A \underline{continuous workflow of cycling tasks} is a single
 workflow composed of cycling tasks, not just a series of separate single-cycle
 workflows, and it may extend indefinitely into the future.}  This describes
-cylc's classic {\em iterative cycling} mode in which the scheduler continually
+Cylc's classic {\em iterative cycling} mode in which the scheduler continually
 extends the workflow to future cycle points as the suite runs, and each
 instance of a repeated job is represented by the same logical task with a
 different cycle point. {\em Parameterized cycling} is an alternative to this
@@ -29,7 +29,7 @@ of a repeated job is represented by a different logical task with a different
 task name, and the entire workflow is mapped out at start-up rather than
 extended as the suite runs. Parameterized cycling is generally not as flexible
 or powerful as iterative cycling, and it has several significant disadvantages,
-but it can sometimes be useful - see the cylc user guide for more information. 
+but it can sometimes be useful - see the Cylc user guide for more information. 
 
 The Section~\ref{Cylc Overview} example workflow is repeated here:
 \begin{center}
@@ -44,15 +44,17 @@ Here's a job schedule for a single cycle of the workflow,
 Bar width is proportional to job run time, and the vertical axis has no
 meaning.  So {\em b} and {\em c} start running at the same time,
 immediately after {\em a} finishes, and so on.  The job schedule for repeatedly
-cycling the same workflow is shown below, for cylc (top) and a traditional
-fixed-cycle scheduler (bottom) 
+cycling the same workflow is shown below, for Cylc (top) and a traditional
+fixed-cycle scheduler (bottom):
 
 \begin{center}
     \includegraphics[width=0.5\columnwidth]{resources/tex/timeline-two}
 \end{center}
-
+{\em Correction: this diagram assumes inter-cycle dependence between
+successive instances of \lstinline=b= and \lstinline=c= as well as
+\lstinline=a=, as in the Cylc User Guide introduction.}
 The different colours represent different cycle points.  Cylc automatically
-interleave cycles for faster scheduling throughput. In this case cylc is
+interleave cycles for faster scheduling throughput. In this case Cylc is
 running tasks from four different cycle points at once, most of the time. The
 optimal result is shown (the white time-gaps between tasks are are required by
 the dependency relationshionships). This assumes sufficient compute resource to

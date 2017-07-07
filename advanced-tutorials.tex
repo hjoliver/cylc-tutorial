@@ -1,12 +1,12 @@
 \section{Advanced Tutorials}
 
-This section outlines some of the more advanced features of cylc along with
+This section outlines some of the more advanced features of Cylc along with
 links to tutorials on these features on the rose documentation website.
 
 The final example from each tutorial has been provided as a pre-built suite on
 the Metomi VM for convenience. These suites are referenced here in the ``Demo
 Suite'' sections. If you don't want to go work though the full tutorials these
-suites will give you working examples of the tutorials topic.
+suites will give you working examples of the topic.
 
 
 \subsection{Advanced Cycling}
@@ -110,7 +110,7 @@ succeeds. It is possible to trigger tasks off of other states e.g:
 \subsection{Families}
 \label{Families}
 
-Often a suite will contain a collection of similar tasks. With cylc these
+Often a suite will contain a collection of similar tasks. With Cylc these
 tasks can be grouped together for convenience. This can be used to factor out a lot of repeated configuration to make suites more readable and maintainable.
 
 \paragraph*{Example}
@@ -148,7 +148,7 @@ inherits the \lstinline{script} setting but overrides the
 \end{shaded*}
 
 \subsection{Retries}
-Sometimes tasks fail, you can tell cylc to automatically retry failed tasks.
+Sometimes tasks fail. You can tell Cylc to automatically retry failed tasks.
 
 \paragraph*{Example} $ $
 
@@ -172,7 +172,7 @@ Sometimes tasks fail, you can tell cylc to automatically retry failed tasks.
 
 Jinja2 (\url{http://jinja.pocoo.org/}) is a {\em template processor} -
 essentially a programming language that can be embedded in arbitrary text,
-for the purpose of altering that text.  In cylc, you can think of
+for the purpose of altering that text.  In Cylc, you can think of
 Jinja2 as providing programming constructs (variables, data structures,
 loops, etc.) for {\em generating your suite definition}.
 
@@ -266,7 +266,9 @@ loops.  For more on this topic see the Cylc User Guide.
 
 \lstinline[language=bash]{cylc broadcast} is a command line utility that can
 be used to change any setting contained within the \lstinline{[runtime]}
-section of a suite.rc file whilst the suite is running.
+section of a suite.rc file whilst the suite is running. One of its many uses is
+to communicate information from a running task job to the environment of other
+downstream tasks that are yet to start.
 
 \paragraph*{Example} The following line of bash script will set the remote
 host for the task \lstinline{task_name}.
@@ -338,8 +340,11 @@ tasks to run at a time.
 \subsection{Clock Triggered Tasks}
 \label{Clock Triggered Tasks}
 
-Sometimes tasks should wait until a certain time before running, in cylc this
-is possible using ''clock triggering``.
+Sometimes tasks should wait until a certain real clock time before running. In
+Cylc this is done by attaching a {\em clock trigger} to the task. These
+are expressed as an offset from the task cycle point - the full date-time not
+just time of day, so a clock trigger has no effect if the suite gets delayed
+or run over a historical case study period.
 
 % TODO - describe as "real date-time dependencies"?
 
