@@ -19,7 +19,7 @@ This example supposes:
 
 Our Fortran program reads in some position data and then pretends to calculate a new one based on a compass direction and a 5 knot speed for a given period of time.
 
-If you are reading this tutorial via the Cylc VM then the Fortran code is located at {\em \$HOME/tutorial/suites/navigation/src/dead\_reckoning.f90}. Otherwise, the code is given in Appendix~\ref{Appendix In-Depth Suite Writing Tutorial}.
+If you are reading this tutorial via the Cylc VM then the Fortran code is located at {\em \$HOME/cylc-tutorial/suites/navigation/src/dead\_reckoning.f90}. Otherwise, the code is given in Appendix~\ref{Appendix In-Depth Suite Writing Tutorial}.
 
 We need to analyse our program to figure out what the dependencies are.
 
@@ -54,12 +54,12 @@ If you are running this tutorial on the Cylc VM \footnote{
     \item copy the Fortran code into a file called {\em src/dead\_reckoning.f90}
     \item create a suite.rc file under {\em navigation} with the contents below in Section~\ref{Suite Writing suite.rc file}.
 \end{itemize}
-} , the raw directory structure of the suite is set up for you. Change directory to {\em \$HOME/tutorial/suites/navigation/}. This is our suite top-level directory.
+} , the raw directory structure of the suite is set up for you. Change directory to {\em \$HOME/cylc-tutorial/suites/navigation/}. This is our suite top-level directory.
 
 \subsubsection{suite.rc file}
 \label{Suite Writing suite.rc file}
 
-An initial suite.rc file is already present in the {\em \$HOME/tutorial/suites/navigation/} directory.
+An initial suite.rc file is already present in the {\em \$HOME/cylc-tutorial/suites/navigation/} directory.
 It looks like this:
 
 \lstset{language=suiterc}
@@ -336,7 +336,7 @@ $\$$ rose suite-run
 
 Our extra task should run at 20160601T1200Z and 20160602T1200Z. If it does, congratulations!
 
-If you run into any problems, you can refer to a completed suite at {\em \$HOME/tutorial/suites/navigation-complete}.
+If you run into any problems, you can refer to a completed suite at {\em \$HOME/cylc-tutorial/suites/navigation-complete}.
 
 You can check the graphing by running:
 
