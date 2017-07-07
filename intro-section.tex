@@ -234,12 +234,21 @@ subprocess).
         script = run-model
         [[[job]]]
             batch system = pbs
-            execution time limit = PT15M
+            execution time limit = PT15M  # 15 minutes
 \end{lstlisting}
 Here the task \lstinline=run-model= will submit its job to PBS. Cylc translates
-\lstinline=execution time limit= (15 minutes here, in ISO 8601 date-time
-notation) to the wall clock limit directive appropriate to the batch system, or
-uses it with the \lstinline=timeout= command for background jobs. 
+\lstinline=execution time limit= to the appropriate batch system wall clock
+limit directive, or uses it with the \lstinline=timeout= command for background
+jobs.
+
+\lstinline=PT15M= is 15 minutes in ISO8601 date-time notation - see
+\url{http://wikipedia.org/wiki/ISO_8601}. \lstinline=P= denotes a duration and
+\lstinline=T15M= means 15 minutes. Other examples of ISO8601 durations are:
+\begin{itemize}
+    \item \lstinline{-PT12H} (12 hours ago).
+    \item \lstinline{-PT6H30M} (6 hours 30 minutes ago).
+    \item \lstinline{P1W} (1 week in the future).
+\end{itemize}
 
 \note{So far we have only configured individual tasks.  In fact the
 \lstinline=[runtime]= section is a {\em multiple inheritance hierarchy} that
@@ -338,7 +347,7 @@ sequence with associated dependencies defined in a graph string. An optional
 This suite definition says to run task \lstinline=model= for each cycle point
 on a sequence of date-times with a 1-month interval between 2000-01 and 2000-05 
 (see~\ref{advanced-cycling} for other kinds of cycling sequence).
-With no clock-triggers defined (see~\ref{Clock Triggered Tasks}) these
+With no clock triggers defined (see~\ref{Clock Triggered Tasks}) these
 date-times have no connection to the real-time clock.  Each instance of
 \lstinline=model= is merely labelled with its cycle point value (which the task
 job can use, e.g.\ as a model run start date).  In this case
@@ -362,16 +371,8 @@ inter-cycle dependence correctly,
         [[[P1M]]]
             graph = model[-P1M] => model
 \end{lstlisting}
+(\lstinline=P1M= is one month, as an ISO8601 duration.)
 
-\lstinline=P1D= is an ISO8601 duration - see
-    \url{http://wikipedia.org/wiki/ISO_8601#Durations}. \lstinline=P= denotes a
-    duration and \lstinline=1M= means one month. Other examples of ISO8601
-    durations are:
-\begin{itemize}
-    \item \lstinline{-PT12H} (12 hours ago).
-    \item \lstinline{-PT6H30M} (6 hours 30 minutes ago).
-    \item \lstinline{P1W} (1 week in the future).
-\end{itemize}
 
 \subsection{Cycling Suite Tutorial}
 

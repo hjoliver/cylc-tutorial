@@ -19,17 +19,16 @@ offset from that point. See Section~\ref{Clock Triggered Tasks}.
 
 \terminology{A \underline{continuous workflow of cycling tasks} is a single
 workflow composed of cycling tasks, not just a series of separate single-cycle
-workflows, and it may extend indefinitely into the future.}  This describes
-Cylc's classic {\em iterative cycling} mode in which the scheduler continually
-extends the workflow to future cycle points as the suite runs, and each
-instance of a repeated job is represented by the same logical task with a
-different cycle point. {\em Parameterized cycling} is an alternative to this
-for workflows that are {\em finite in extent and not too large}: each instance
-of a repeated job is represented by a different logical task with a different
-task name, and the entire workflow is mapped out at start-up rather than
-extended as the suite runs. Parameterized cycling is generally not as flexible
-or powerful as iterative cycling, and it has several significant disadvantages,
-but it can sometimes be useful - see the Cylc user guide for more information. 
+workflows, and it may extend indefinitely into the future.} Each instance of a
+repeated job is represented by the same logical task with a different cycle
+point, and Cylc continually extends the workflow as the suite runs, potentially
+indefinitely. {\em Parameterized cycling} is an alternative to this for
+workflows that are {\em finite in extent and not too large}: each instance of a
+repeated job is represented by a different logical task with a different task
+name, and the entire workflow is mapped out at start-up rather than extended as
+the suite runs. In this case, as far as the scheduler is concerned there is no
+cycling, but Cylc nevertheless allows you to define the workflow very
+efficiently via Jinja2 loops or built-in suite parameter expansion. 
 
 The Section~\ref{Cylc Overview} example workflow is repeated here:
 \begin{center}

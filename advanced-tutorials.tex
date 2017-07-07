@@ -65,8 +65,10 @@ A single \lstinline{R1} is taken to mean 'run once at the initial cycle point'.
 \vspace{5mm}
 
 \begin{shaded*}
-\textbf{Further Reading}:
-\url{http://cylc.github.io/cylc/html/single/cug-html.html#9.3.4}
+  \textbf{Further Reading}: see {\em Graph Section Headings} in the Cylc User
+  Guide \url{http://cylc.github.io/cylc/documentation.html#the-cylc-user-guide}
+  (direct link to the online version at cylc-7.4.0:
+  \url{http://cylc.github.io/cylc/html/single/cug-html.html#9.3.4})
 \end{shaded*}
 
 
@@ -144,7 +146,7 @@ inherits the \lstinline{script} setting but overrides the
 \textbf{Tutorial}:
 \url{http://metomi.github.io/rose/doc/rose-rug-advanced-tutorials-family-trigs.html}
 
-\textbf{Demo Suite}: \url{~/tutorial/suites/family-triggers}
+\textbf{Demo Suite}: \lstinline=~/tutorial/suites/family-triggers=
 \end{shaded*}
 
 \subsection{Retries}
@@ -163,8 +165,7 @@ Sometimes tasks fail. You can tell Cylc to automatically retry failed tasks.
 \textbf{Tutorial}:
 \url{http://metomi.github.io/rose/doc/rose-rug-advanced-tutorials-retries.html}
 
-\textbf{Demo Suite}:
-\url{~/tutorial/suites/retries}
+\textbf{Demo Suite}: \lstinline=~/tutorial/suites/retries=
 \end{shaded*}
 
 
@@ -232,8 +233,7 @@ The \lstinline=cylc graph= command shows the suite like this:
 \begin{shaded*}
 \textbf{Tutorial}: \url{http://metomi.github.io/rose/doc/rose-rug-advanced-tutorials-jinja2.html}
 
-\textbf{Demo Suite}:
-\url{~/tutorial/suites/jinja2}
+\textbf{Demo Suite}: \lstinline=~/tutorial/suites/jinja2=
 \end{shaded*}
 
 \subsection{Parameterized Tasks}
@@ -280,8 +280,7 @@ $ cylc broadcast <suite_name> -n <task_name> -s [remote]host=<host_name>
 \begin{shaded*}
 \textbf{Tutorial}: \url{http://metomi.github.io/rose/doc/rose-rug-advanced-tutorials-broadcast.html}
 
-\textbf{Demo Suite}:
-\url{~/tutorial/suites/broadcast}
+\textbf{Demo Suite}: \lstinline=~/tutorial/suites/broadcast=
 \end{shaded*}
 
 \subsection{Suicide Triggers}
@@ -307,8 +306,7 @@ the task \lstinline{task} succeeds.
 \begin{shaded*}
 \textbf{Tutorial}: \url{http://metomi.github.io/rose/doc/rose-rug-advanced-tutorials-suicide.html}
 
-\textbf{Demo Suite}:
-\url{~/tutorial/suites/suicide-triggers}
+\textbf{Demo Suite}: \lstinline=~/tutorial/suites/suicide-triggers=
 \end{shaded*}
 
 \subsection{Queues}
@@ -333,22 +331,19 @@ tasks to run at a time.
 \begin{shaded*}
 \textbf{Tutorial}: \url{http://metomi.github.io/rose/doc/rose-rug-advanced-tutorials-queues.html}
 
-\textbf{Demo Suite}:
-\url{~/tutorial/suites/queues}
+\textbf{Demo Suite}: \lstinline=~/tutorial/suites/queues=
 \end{shaded*}
 
 \subsection{Clock Triggered Tasks}
 \label{Clock Triggered Tasks}
 
-Sometimes tasks should wait until a certain real clock time before running. In
-Cylc this is done by attaching a {\em clock trigger} to the task. These
-are expressed as an offset from the task cycle point - the full date-time not
-just time of day, so a clock trigger has no effect if the suite gets delayed
-or run over a historical case study period.
+Sometimes tasks need to wait until a certain real clock time before running. To
+do this in Cylc you can attach a {\em clock trigger} to the task. Clock
+triggers are expressed as offsets from the task cycle point (in words, ``this
+task can run when the wall time is equal to 3.5 hours past its cycle point
+time). Note clock-triggers depend on the full date-time not just time of day,
+so they have no effect if the suite is delayed or run over a historical period.
 
-% TODO - describe as "real date-time dependencies"?
-
-- see \ref{Clock Triggered Tasks}) 
 \paragraph*{Example} $ $
 
 \begin{lstlisting}
@@ -364,7 +359,6 @@ or run over a historical case study period.
 \begin{shaded*}
 \textbf{Tutorial}: \url{http://metomi.github.io/rose/doc/rose-rug-advanced-tutorials-clock-triggered.html}.
 
-\textbf{Demo Suite}:
-\url{~/tutorial/suites/clock-triggers}
+\textbf{Demo Suite}: \lstinline=~/tutorial/suites/clock-triggers=
 \end{shaded*}
 
